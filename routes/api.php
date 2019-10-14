@@ -16,10 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/member', function (Request $request) {
 	return $request->member();
 });
-//Route::middleware('auth:api')->resource('products','ProductController',['except' => ['store']]);
+
 Route::post('login', 'LoginController@login');
-//Route::resource('member','MemberController',['only' => ['store']]);
 Route::post('member', 'MemberController@store');
+Route::post('admin', 'MemberController@adminStore');
 
 Route::middleware('auth:api')->get('member', 'MemberController@index');
 Route::middleware('auth:api')->put('member', 'MemberController@update');
