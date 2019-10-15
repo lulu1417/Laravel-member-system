@@ -48,7 +48,7 @@ class MemberController extends BaseController {
 			]);
 
 			if ($create) {
-				return "Your Token is $apiToken.";
+				return "Register as a normal user. Your Token is $apiToken.";
 			}
 
 		} catch (Exception $e) {
@@ -57,31 +57,31 @@ class MemberController extends BaseController {
 		}
 
 	}
-    public function adminStore(Request $request) {
-        try {
-            $request->validate([
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:members'],
-                'password' => ['required', 'string', 'min:6', 'max:12'],
-            ]);
+	public function adminStore(Request $request) {
+		try {
+			$request->validate([
+				'email' => ['required', 'string', 'email', 'max:255', 'unique:members'],
+				'password' => ['required', 'string', 'min:6', 'max:12'],
+			]);
 
-            $apiToken = Str::random(10);
-            $create = Member::create([
-                'email' => $request['email'],
-                'password' => $request['password'],
-                'isAdmin' => '1',
-                'api_token' => $apiToken,
-            ]);
+			$apiToken = Str::random(10);
+			$create = Member::create([
+				'email' => $request['email'],
+				'password' => $request['password'],
+				'isAdmin' => '1',
+				'api_token' => $apiToken,
+			]);
 
-            if ($create) {
-                return "Register as Admin. Your Token is $apiToken.";
-            }
+			if ($create) {
+				return "Register as an admin. Your Token is $apiToken.";
+			}
 
-        } catch (Exception $e) {
-            sendError($e, 'Registered failed.', 500);
+		} catch (Exception $e) {
+			sendError($e, 'Registered failed.', 500);
 
-        }
+		}
 
-    }
+	}
 
 	/**
 	 * Update the specified resource in storage.
